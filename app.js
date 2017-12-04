@@ -1,18 +1,19 @@
 const express = require('express')
 const app = express()
+const path = require('path')
 const mongoose = require('mongoose')
 const config = require('./config')
 
 // connect to MongoDB
 mongoose.connect(config.db_uri)
 const db = mongoose.connection
-console.log(process.env)
+
 // handle mongo Error
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => console.log('Connected to db!'))
 
 // serve static files from /public
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // include routes
 const routes = require('./routes/router')
