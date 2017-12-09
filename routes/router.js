@@ -1,16 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const path = require('path')
+const Controller = require('../controllers/controller')
 
-// GET route for homepage
-router.get('/', (req, res, next) => {
-  return res.sendFile(path.join(__dirname, '/public/index.html'))
-})
-
-// GET route for new URL
-
-router.get('/new/*', (req, res, next) => {
-  return res.send(req.url)
-})
-
-module.exports = router
+module.exports = (app) => {
+  app.get('/', Controller.sendHome)
+  app.get('/new/(*)', Controller.createUrl)
+  app.get('/:id', Controller.getShortUrl)
+}
