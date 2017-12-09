@@ -5,6 +5,8 @@ const mongoose = require('mongoose')
 const routes = require('./routes/router')
 const config = require('./config')
 
+const port = process.env.PORT || 3000
+
 mongoose.Promise = global.Promise
 
 // connect to MongoDB
@@ -35,4 +37,4 @@ app.use((err, req, res, next) => {
 })
 
 // listen on port 3000
-app.listen(3000, () => console.log('Listening on port 3000!'))
+app.listen(port, () => console.log(`Listening on port ${port}!`))
