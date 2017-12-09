@@ -1,4 +1,3 @@
-const path = require('path')
 const Url = require('../models/url')
 
 // helper functions
@@ -7,24 +6,6 @@ function validateUrl (value) {
 }
 
 module.exports = {
-
-  sendHome (req, res, next) {
-    // Add the seed URL entry if it doesn't exist
-    Url.findOne({ 'urlId': 1234 })
-      .then((url) => {
-        if (!url) {
-          const seedUrl = new Url({
-            'original url': 'https://google.com',
-            'short url': req.protocol + '://' + req.get('host') + '/' + 1234,
-            'urlId': 1234
-          })
-          seedUrl.save()
-        }
-      }).catch(err => console.log(err))
-
-    res.sendFile(path.join(__dirname, '../public/index.html'))
-  },
-  // TODO: Create regex to filter proper URLs
   createUrl (req, res, next) {
     const rand = Math.random().toString(36).substr(8)
     const originalUrl = req.params[0]
